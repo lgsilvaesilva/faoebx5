@@ -1,0 +1,33 @@
+url: http://lgsilvaesilva.github.io/faoebx5
+
+template:
+  params:
+    bootswatch: cosmo
+
+authors:
+  Luis G. Silva e Silva:
+    href: https://lgsilvaesilva.github.io
+
+  Thomas Berger:
+
+reference:
+  - title: Credentials
+    contents:
+    - SetEBXCredentials
+    - RemoveEBXCredentials
+
+  - title: EBX Code Lists
+    contents:
+    - GetEBXCodeLists
+    - ReadEBXCodeList
+    - InsertEBXCodeList
+    - UpdateEBXCodeList
+    - DeleteEBXCodeList
+
+  - title: EBX Group
+    contents:
+    - GetEBXGroups
+    - ReadEBXGroup
+    - InsertEBXGroup
+    - UpdateEBXGroup
+    - DeleteEBXGroup
