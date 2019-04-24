@@ -10,6 +10,11 @@ authors:
 
   Thomas Berger:
 
+home:
+  links:
+  - text: Repository
+    href: https://github.com/lgsilvaesilva/faoebx5
+
 reference:
   - title: Credentials
     contents:
