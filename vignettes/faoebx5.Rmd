@@ -1,0 +1,75 @@
+---
+title: 'faoebx5 overview'
+date: '`r Sys.Date()`'
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    vignette: >
+      %\VignetteIndexEntry{valr-overview}
+      %\VignetteEngine{knitr::rmarkdown}
+      %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_opts, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center"
+)
+
+options(width = 95)
+```
+
+The first time you use the `faoebx5` package you must set your EBX credentials. In this step your credetials will be sotred in the safe way, for this we have used the [`keyring`](https://CRAN.R-project.org/package=keyring) R package. If you would not store your credentials, you should use the function `RemoveEBXCredentials()`.
+
+Once you have typed your password twice after run `SetEBXCredentials()` function, you do not need to rerun this function, because your credential will be kept.
+
+```{r eval=TRUE, include=TRUE, message=FALSE}
+library('faoebx5')
+SetEBXCredentials()
+```
+
+# Code Lists  
+
+TODO
+
+## GetEBXCodeLists()
+
+This function aimed to get the list of code list available in the EBX5.
+
+```{r eval=TRUE, include=TRUE}
+ebx_cl <- GetEBXCodeLists()
+ebx_cl[1:15, ]
+```
+
+## ReadEBXCodeList()
+
+TODO
+
+```{r eval=TRUE, include=TRUE}
+cl_isscfc <- ReadEBXCodeList(cl_name = 'ISSCFC')
+head(cl_isscfc)
+```
+
+## InsertEBXCodeList()
+
+TODO
+
+```{r eval=FALSE, include=TRUE}
+InsertEBXCodeList(data     = cl_isscfc_new,
+                  cl_name  = 'FAO_Level1',
+                  folder   = 'Commodity',
+                  branch   = 'Fishery',
+                  instance = 'Fishery')
+```
+
+## UpdateEBXCodeList()
+
+TODO
+
+```{r eval=FALSE, include=TRUE}
+UpdateEBXCodeList(cl_name = 'EBXCodelist',
+                  folder = 'Metadata',
+                  data = cl_update)
+```

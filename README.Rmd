@@ -8,6 +8,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#",
   fig.path = "man/figures/README-")
+
+options(width = 95)
 ```
 
 # faoebx5  <img src="man/figures/logo.png" align="right" alt="" width="120" />
@@ -23,10 +25,13 @@ install.packages("devtools")
 devtools::install_github('lgsilvaesilva/faoebx5')
 ```
 
-## faoebx5 Example
+## Functions
 
-```{r eval=FALSE, include=TRUE}
-library(faoebx5)
-```
+`faoebx5` provides a set of functions to manage code lists and groups data stored on EBX database. The collection of functions is split into two groups, those to manage code list and those to control groups. Please, see the [Reference](reference/index.html) tab for more details about the functions, or you can start with examples on the page [Get started ](articles/faoebx5.html).
+
+
+
+
+
 
 
