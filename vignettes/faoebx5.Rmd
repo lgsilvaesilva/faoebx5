@@ -33,7 +33,7 @@ SetEBXCredentials()
 
 ## GetEBXCodeLists()
 
-This function aimed to get the list of code list available in the EBX5.
+This function aimed to get the list of code list available in the EBX5. It has two arguments: `branch` and `instance` that default values are set as <span class="badge badge-danger">"Fishery"</span>.
 
 ```{r eval=TRUE, include=TRUE}
 ebx_cl <- GetEBXCodeLists()
@@ -42,31 +42,41 @@ head(ebx_cl)
 
 ## ReadEBXCodeList()
 
-This function aimed to read code list data from EBX5 to R.
+This function aimed to read code list data from EBX5 to R. As we can see, 
 
 ```{r eval=TRUE, include=TRUE}
 cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
 cl_fao_level1 %>% tbl_df()
 ```
 
-<!-- ## InsertEBXCodeList() -->
+<hr>
 
-<!-- TODO -->
+<div class="alert alert-dismissible alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <p class="mb-0">Please, be aware that the next two functions can modify the original data. Anyway, we should have permition to do changes in the original data.</p>
+</div>
 
-<!-- ```{r eval=FALSE, include=TRUE} -->
-<!-- InsertEBXCodeList(data     = cl_isscfc_new, -->
-<!--                   cl_name  = 'FAO_Level1', -->
-<!--                   folder   = 'Commodity', -->
-<!--                   branch   = 'Fishery', -->
-<!--                   instance = 'Fishery') -->
-<!-- ``` -->
+<hr>
 
-<!-- ## UpdateEBXCodeList() -->
+## InsertEBXCodeList()
 
-<!-- TODO -->
+TODO
 
-<!-- ```{r eval=FALSE, include=TRUE} -->
-<!-- UpdateEBXCodeList(cl_name = 'EBXCodelist', -->
-<!--                   folder = 'Metadata', -->
-<!--                   data = cl_update) -->
-<!-- ``` -->
+```{r eval=FALSE, include=TRUE}
+InsertEBXCodeList(data     = cl_isscfc_new,
+                  cl_name  = 'FAO_Level1',
+                  folder   = 'Commodity',
+                  branch   = 'Fishery',
+                  instance = 'Fishery')
+```
+
+## UpdateEBXCodeList()
+
+TODO
+
+```{r eval=FALSE, include=TRUE}
+UpdateEBXCodeList(cl_name = 'EBXCodelist',
+                  folder = 'Metadata',
+                  data = cl_update)
+```

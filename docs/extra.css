@@ -6,3 +6,8 @@ p {
 h2 {
   font-size: 26px;
 }
+
+
+hr {
+  border-width: 3px;
+}

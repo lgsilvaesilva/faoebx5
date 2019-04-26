@@ -88,7 +88,7 @@
 <div id="getebxcodelists" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getebxcodelists" class="anchor"></a>GetEBXCodeLists()</h2>
-<p>This function aimed to get the list of code list available in the EBX5.</p>
+<p>This function aimed to get the list of code list available in the EBX5. It has two arguments: <code>branch</code> and <code>instance</code> that default values are set as <span class="badge badge-danger">“Fishery”</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebx_cl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/GetEBXCodeLists.html">GetEBXCodeLists</a></span>()
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ebx_cl)
 <span class="co">#&gt;    Identifier                      Acronym    Folder         Name  Branch Instance</span>
@@ -102,7 +102,7 @@
 <div id="readebxcodelist" class="section level2">
 <h2 class="hasAnchor">
 <a href="#readebxcodelist" class="anchor"></a>ReadEBXCodeList()</h2>
-<p>This function aimed to read code list data from EBX5 to R.</p>
+<p>This function aimed to read code list data from EBX5 to R. As we can see,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl_fao_level1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'FAO_Level1 '</span>)
 cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbl_df</span>()
 <span class="co">#&gt; # A tibble: 4 x 5</span>
@@ -112,22 +112,37 @@ cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class
 <span class="co">#&gt; 2 50064      2        Crustaceans              Crustacés                Crustáceos             </span>
 <span class="co">#&gt; 3 50086      5        Molluscs, aquatic inver~ Mollusques, autres inve~ Moluscos y otros inver~</span>
 <span class="co">#&gt; 4 50114      7        Fish, crustaceans, moll~ Poissons, crustacés, mo~ Peces, crustáceos, mol~</span></code></pre></div>
-<!-- ## InsertEBXCodeList() -->
-<!-- TODO -->
-<!-- ```{r eval=FALSE, include=TRUE} -->
-<!-- InsertEBXCodeList(data     = cl_isscfc_new, -->
-<!--                   cl_name  = 'FAO_Level1', -->
-<!--                   folder   = 'Commodity', -->
-<!--                   branch   = 'Fishery', -->
-<!--                   instance = 'Fishery') -->
-<!-- ``` -->
-<!-- ## UpdateEBXCodeList() -->
-<!-- TODO -->
-<!-- ```{r eval=FALSE, include=TRUE} -->
-<!-- UpdateEBXCodeList(cl_name = 'EBXCodelist', -->
-<!--                   folder = 'Metadata', -->
-<!--                   data = cl_update) -->
-<!-- ``` -->
+<hr>
+<div class="alert alert-dismissible alert-warning">
+<button type="button" class="close" data-dismiss="alert">
+×
+</button>
+<h4 class="alert-heading">
+Warning!
+</h4>
+<p class="mb-0">
+Please, be aware that the next two functions can modify the original data. Anyway, we should have permition to do changes in the original data.
+</p>
+</div>
+<hr>
+</div>
+<div id="insertebxcodelist" class="section level2">
+<h2 class="hasAnchor">
+<a href="#insertebxcodelist" class="anchor"></a>InsertEBXCodeList()</h2>
+<p>TODO</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList</a></span>(<span class="dt">data     =</span> cl_isscfc_new,
+                  <span class="dt">cl_name  =</span> <span class="st">'FAO_Level1'</span>,
+                  <span class="dt">folder   =</span> <span class="st">'Commodity'</span>,
+                  <span class="dt">branch   =</span> <span class="st">'Fishery'</span>,
+                  <span class="dt">instance =</span> <span class="st">'Fishery'</span>)</code></pre></div>
+</div>
+<div id="updateebxcodelist" class="section level2">
+<h2 class="hasAnchor">
+<a href="#updateebxcodelist" class="anchor"></a>UpdateEBXCodeList()</h2>
+<p>TODO</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'EBXCodelist'</span>,
+                  <span class="dt">folder =</span> <span class="st">'Metadata'</span>,
+                  <span class="dt">data =</span> cl_update)</code></pre></div>
 </div>
   </div>
 
@@ -138,6 +153,8 @@ cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getebxcodelists">GetEBXCodeLists()</a></li>
       <li><a href="#readebxcodelist">ReadEBXCodeList()</a></li>
+      <li><a href="#insertebxcodelist">InsertEBXCodeList()</a></li>
+      <li><a href="#updateebxcodelist">UpdateEBXCodeList()</a></li>
       </ul>
 </div>
       </div>
