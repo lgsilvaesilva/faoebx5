@@ -27,12 +27,9 @@ Once you have typed your password twice after run `SetEBXCredentials()` function
 
 ```{r eval=TRUE, include=TRUE, message=FALSE}
 library('faoebx5')
+library('dplyr')
 SetEBXCredentials()
 ```
-
-# Code Lists  
-
-TODO
 
 ## GetEBXCodeLists()
 
@@ -40,36 +37,36 @@ This function aimed to get the list of code list available in the EBX5.
 
 ```{r eval=TRUE, include=TRUE}
 ebx_cl <- GetEBXCodeLists()
-ebx_cl[1:15, ]
+head(ebx_cl)
 ```
 
 ## ReadEBXCodeList()
 
-TODO
+This function aimed to read code list data from EBX5 to R.
 
 ```{r eval=TRUE, include=TRUE}
-cl_isscfc <- ReadEBXCodeList(cl_name = 'ISSCFC')
-head(cl_isscfc)
+cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
+cl_fao_level1 %>% tbl_df()
 ```
 
-## InsertEBXCodeList()
+<!-- ## InsertEBXCodeList() -->
 
-TODO
+<!-- TODO -->
 
-```{r eval=FALSE, include=TRUE}
-InsertEBXCodeList(data     = cl_isscfc_new,
-                  cl_name  = 'FAO_Level1',
-                  folder   = 'Commodity',
-                  branch   = 'Fishery',
-                  instance = 'Fishery')
-```
+<!-- ```{r eval=FALSE, include=TRUE} -->
+<!-- InsertEBXCodeList(data     = cl_isscfc_new, -->
+<!--                   cl_name  = 'FAO_Level1', -->
+<!--                   folder   = 'Commodity', -->
+<!--                   branch   = 'Fishery', -->
+<!--                   instance = 'Fishery') -->
+<!-- ``` -->
 
-## UpdateEBXCodeList()
+<!-- ## UpdateEBXCodeList() -->
 
-TODO
+<!-- TODO -->
 
-```{r eval=FALSE, include=TRUE}
-UpdateEBXCodeList(cl_name = 'EBXCodelist',
-                  folder = 'Metadata',
-                  data = cl_update)
-```
+<!-- ```{r eval=FALSE, include=TRUE} -->
+<!-- UpdateEBXCodeList(cl_name = 'EBXCodelist', -->
+<!--                   folder = 'Metadata', -->
+<!--                   data = cl_update) -->
+<!-- ``` -->

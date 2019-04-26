@@ -71,7 +71,7 @@
     <div class="page-header toc-ignore">
       <h1>faoebx5 overview</h1>
             
-            <h4 class="date">2019-04-25</h4>
+            <h4 class="date">2019-04-26</h4>
       
       
       <div class="hidden name"><code>faoebx5.Rmd</code></div>
@@ -83,80 +83,51 @@
 <p>The first time you use the <code>faoebx5</code> package you must set your EBX credentials. In this step your credetials will be sotred in the safe way, for this we have used the <a href="https://CRAN.R-project.org/package=keyring"><code>keyring</code></a> R package. If you would not store your credentials, you should use the function <code><a href="../reference/RemoveEBXCredentials.html">RemoveEBXCredentials()</a></code>.</p>
 <p>Once you have typed your password twice after run <code><a href="../reference/SetEBXCredentials.html">SetEBXCredentials()</a></code> function, you do not need to rerun this function, because your credential will be kept.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">'faoebx5'</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">'dplyr'</span>)
 <span class="kw"><a href="../reference/SetEBXCredentials.html">SetEBXCredentials</a></span>()</code></pre></div>
-<div id="code-lists" class="section level1">
-<h1 class="hasAnchor">
-<a href="#code-lists" class="anchor"></a>Code Lists</h1>
-<p>TODO</p>
 <div id="getebxcodelists" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getebxcodelists" class="anchor"></a>GetEBXCodeLists()</h2>
 <p>This function aimed to get the list of code list available in the EBX5.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ebx_cl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/GetEBXCodeLists.html">GetEBXCodeLists</a></span>()
-ebx_cl[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, ]
-<span class="co">#&gt;     Identifier                      Acronym      Folder            Name  Branch Instance</span>
-<span class="co">#&gt;  1:        100    CL_FI_COMMODITY_CPC_CLASS   Commodity       CPC_Class Fishery  Fishery</span>
-<span class="co">#&gt;  2:        101 CL_FI_COMMODITY_CPC_DIVISION   Commodity    CPC Division Fishery  Fishery</span>
-<span class="co">#&gt;  3:        102    CL_FI_COMMODITY_CPC_GROUP   Commodity       CPC_Group Fishery  Fishery</span>
-<span class="co">#&gt;  4:        103   CL_FI_COMMODITY_FAO_LEVEL1   Commodity      FAO_Level1 Fishery  Fishery</span>
-<span class="co">#&gt;  5:        104   CL_FI_COMMODITY_FAO_LEVEL2   Commodity      FAO_Level2 Fishery  Fishery</span>
-<span class="co">#&gt;  6:        105   CL_FI_COMMODITY_FAO_LEVEL3   Commodity      FAO_Level3 Fishery  Fishery</span>
-<span class="co">#&gt;  7:        106  CL_FI_COMMODITY_FAOMAJOR_L1   Commodity FAOmajor_Level1 Fishery  Fishery</span>
-<span class="co">#&gt;  8:        107  CL_FI_COMMODITY_FAOMAJOR_L2   Commodity FAOmajor_Level2 Fishery  Fishery</span>
-<span class="co">#&gt;  9:        108   CL_FI_COMMODITY_FAOSTAT_L1   Commodity  FAOSTAT_Level1 Fishery  Fishery</span>
-<span class="co">#&gt; 10:        109   CL_FI_COMMODITY_FAOSTAT_L2   Commodity  FAOSTAT_Level2 Fishery  Fishery</span>
-<span class="co">#&gt; 11:        110    CL_FI_COMMODITY_HS2012_L1 HSCommodity   HS2012_Level1 Fishery  Fishery</span>
-<span class="co">#&gt; 12:        111    CL_FI_COMMODITY_HS2012_L2 HSCommodity   HS2012_Level2 Fishery  Fishery</span>
-<span class="co">#&gt; 13:        112    CL_FI_COMMODITY_HS2012_L3 HSCommodity   HS2012_Level3 Fishery  Fishery</span>
-<span class="co">#&gt; 14:        113       CL_FI_COMMODITY_ISSCFC   Commodity          ISSCFC Fishery  Fishery</span>
-<span class="co">#&gt; 15:        114        CL_FI_COMMODITY_SITC4   Commodity           SITC4 Fishery  Fishery</span></code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ebx_cl)
+<span class="co">#&gt;    Identifier                      Acronym    Folder         Name  Branch Instance</span>
+<span class="co">#&gt; 1:        100    CL_FI_COMMODITY_CPC_CLASS Commodity    CPC_Class Fishery  Fishery</span>
+<span class="co">#&gt; 2:        101 CL_FI_COMMODITY_CPC_DIVISION Commodity CPC Division Fishery  Fishery</span>
+<span class="co">#&gt; 3:        102    CL_FI_COMMODITY_CPC_GROUP Commodity    CPC_Group Fishery  Fishery</span>
+<span class="co">#&gt; 4:        103   CL_FI_COMMODITY_FAO_LEVEL1 Commodity   FAO_Level1 Fishery  Fishery</span>
+<span class="co">#&gt; 5:        104   CL_FI_COMMODITY_FAO_LEVEL2 Commodity   FAO_Level2 Fishery  Fishery</span>
+<span class="co">#&gt; 6:        105   CL_FI_COMMODITY_FAO_LEVEL3 Commodity   FAO_Level3 Fishery  Fishery</span></code></pre></div>
 </div>
 <div id="readebxcodelist" class="section level2">
 <h2 class="hasAnchor">
 <a href="#readebxcodelist" class="anchor"></a>ReadEBXCodeList()</h2>
-<p>TODO</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl_isscfc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'ISSCFC'</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cl_isscfc)
-<span class="co">#&gt;    Identifier           Code Observations funcISSCFCparent ISSCAAPmapping HS2017mapping</span>
-<span class="co">#&gt; 1:          1   034.1.5.1.50         true        034.1.5.1             31       0302.29</span>
-<span class="co">#&gt; 2:          2   034.1.5.2.45         true        034.1.5.2             32       0302.55</span>
-<span class="co">#&gt; 3:          3 034.4.1.5.3.80         true      034.4.1.5.3             33       0304.89</span>
-<span class="co">#&gt; 4:          4   034.1.2.1.30         true        034.1.2.1             23       0301.91</span>
-<span class="co">#&gt; 5:          5   034.1.2.1.90         true        034.1.2.1             39       0301.99</span>
-<span class="co">#&gt; 6:          6   034.1.1.2.90         true        034.1.1.2             39       0301.99</span>
-<span class="co">#&gt;    SITC4mapping funcCPCmapping                                       NameEn</span>
-<span class="co">#&gt; 1:       034.13            423                   Flounder, fresh or chilled</span>
-<span class="co">#&gt; 2:       034.18            424             Alaska pollock, fresh or chilled</span>
-<span class="co">#&gt; 3:        034.4          21222                Atka mackerel fillets, frozen</span>
-<span class="co">#&gt; 4:       034.11            422                        Trouts and chars live</span>
-<span class="co">#&gt; 5:       034.11            429                               Fish live, nei</span>
-<span class="co">#&gt; 6:       034.11            419 Fish for culture incl. ova, fingerlings etc.</span>
-<span class="co">#&gt;                                            NameFr                                      NameEs</span>
-<span class="co">#&gt; 1:                       Flet, frais ou réfrigéré               Platija, fresca o refrigerada</span>
-<span class="co">#&gt; 2:              Lieu d'Alaska, frais ou réfrigéré       Colín de Alaska, fresco o refrigerado</span>
-<span class="co">#&gt; 3:           Filets de maquereau d'Atka, congelés        Lorcha de Atka en filetes, congelada</span>
-<span class="co">#&gt; 4:                     Truites et ombles, vivants                               Truchas vivas</span>
-<span class="co">#&gt; 5:                            Poisson vivant, nca                            Peces vivos, nep</span>
-<span class="co">#&gt; 6: Poissons pour l'élevage incl. oeufs, frai etc. Peces para cultivo incl. huevas, crias etc.</span></code></pre></div>
-</div>
-<div id="insertebxcodelist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#insertebxcodelist" class="anchor"></a>InsertEBXCodeList()</h2>
-<p>TODO</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList</a></span>(<span class="dt">data     =</span> cl_isscfc_new,
-                  <span class="dt">cl_name  =</span> <span class="st">'FAO_Level1'</span>,
-                  <span class="dt">folder   =</span> <span class="st">'Commodity'</span>,
-                  <span class="dt">branch   =</span> <span class="st">'Fishery'</span>,
-                  <span class="dt">instance =</span> <span class="st">'Fishery'</span>)</code></pre></div>
-</div>
-<div id="updateebxcodelist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#updateebxcodelist" class="anchor"></a>UpdateEBXCodeList()</h2>
-<p>TODO</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'EBXCodelist'</span>,
-                  <span class="dt">folder =</span> <span class="st">'Metadata'</span>,
-                  <span class="dt">data =</span> cl_update)</code></pre></div>
-</div>
+<p>This function aimed to read code list data from EBX5 to R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl_fao_level1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'FAO_Level1 '</span>)
+cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbl_df</span>()
+<span class="co">#&gt; # A tibble: 4 x 5</span>
+<span class="co">#&gt;   Identifier FAO_Code NameEn                   NameFr                   NameEs                 </span>
+<span class="co">#&gt;   &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;                    &lt;fct&gt;                    &lt;fct&gt;                  </span>
+<span class="co">#&gt; 1 50001      1        Fish                     Poissons                 Peces                  </span>
+<span class="co">#&gt; 2 50064      2        Crustaceans              Crustacés                Crustáceos             </span>
+<span class="co">#&gt; 3 50086      5        Molluscs, aquatic inver~ Mollusques, autres inve~ Moluscos y otros inver~</span>
+<span class="co">#&gt; 4 50114      7        Fish, crustaceans, moll~ Poissons, crustacés, mo~ Peces, crustáceos, mol~</span></code></pre></div>
+<!-- ## InsertEBXCodeList() -->
+<!-- TODO -->
+<!-- ```{r eval=FALSE, include=TRUE} -->
+<!-- InsertEBXCodeList(data     = cl_isscfc_new, -->
+<!--                   cl_name  = 'FAO_Level1', -->
+<!--                   folder   = 'Commodity', -->
+<!--                   branch   = 'Fishery', -->
+<!--                   instance = 'Fishery') -->
+<!-- ``` -->
+<!-- ## UpdateEBXCodeList() -->
+<!-- TODO -->
+<!-- ```{r eval=FALSE, include=TRUE} -->
+<!-- UpdateEBXCodeList(cl_name = 'EBXCodelist', -->
+<!--                   folder = 'Metadata', -->
+<!--                   data = cl_update) -->
+<!-- ``` -->
 </div>
   </div>
 
@@ -165,14 +136,8 @@ ebx_cl[<span class="dv">1</span><span class="op">:</span><span class="dv">15</sp
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#code-lists">Code Lists</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#getebxcodelists">GetEBXCodeLists()</a></li>
       <li><a href="#readebxcodelist">ReadEBXCodeList()</a></li>
-      <li><a href="#insertebxcodelist">InsertEBXCodeList()</a></li>
-      <li><a href="#updateebxcodelist">UpdateEBXCodeList()</a></li>
-      </ul>
-</li>
       </ul>
 </div>
       </div>
