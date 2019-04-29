@@ -38,7 +38,7 @@ UpdateEBXCodeList <- function(data,
                               branch = 'Fishery',
                               instance = 'Fishery') {
 
-  .user <- Sys.getenv('USERNAME')
+  .user <- Sys.getenv('USERNAME_EBX')
 
   ##-- SOAP: Header ----
   headerFields <- header_fields()

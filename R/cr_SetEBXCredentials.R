@@ -23,10 +23,14 @@
 SetEBXCredentials <- function(username) {
 
   if(missing(username)) {
+
     username <- Sys.getenv('USERNAME')
+    Sys.setenv('USERNAME_EBX' = username)
 
   } else {
-    Sys.setenv('USERNAME' = username)
+
+    Sys.setenv('USERNAME_EBX' = username)
+
   }
 
   if(!"EBX" %in% keyring::keyring_list()$keyring) {
@@ -34,11 +38,10 @@ SetEBXCredentials <- function(username) {
     keyring::keyring_create(keyring = "EBX")
     keyring::keyring_lock("EBX")
 
-  } else {
-
-    ebx_key_list <- keyring::key_list(service = "EBX_SECRET", "EBX")
-
   }
+
+  ebx_key_list <- keyring::key_list(service = "EBX_SECRET", "EBX")
+
 
   if(username %in% ebx_key_list$username) {
 

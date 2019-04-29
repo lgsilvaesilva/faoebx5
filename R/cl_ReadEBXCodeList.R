@@ -31,7 +31,7 @@ ReadEBXCodeList <- function(cl_name,
     stop('Please, provide the code list name.')
   }
 
-  .user <- Sys.getenv('USERNAME')
+  .user <- Sys.getenv('USERNAME_EBX')
 
   ##-- SOAP: Header ----
   headerFields <- header_fields()

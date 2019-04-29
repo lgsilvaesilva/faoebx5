@@ -23,11 +23,13 @@ RemoveEBXCredentials <- function(username) {
   if("EBX" %in% keyring::keyring_list()$keyring) {
 
     if(missing(username)) {
+
       username <- Sys.getenv('USERNAME')
+
     }
 
     keyring::key_delete(service = 'EBX_SECRET',
-               username = Sys.getenv('USERNAME'),
+               username = username,
                keyring = 'EBX')
 
     keyring::keyring_delete('EBX')

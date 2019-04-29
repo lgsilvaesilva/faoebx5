@@ -26,7 +26,7 @@
 #' @author Luis G. Silva e Silva, \email{luis.silvaesilva@fao.org}
 GetEBXCodeLists <- function(branch = 'Fishery', instance = 'Fishery') {
 
-  .user <- Sys.getenv('USERNAME')
+  .user <- Sys.getenv('USERNAME_EBX')
 
 
   ##-- SOAP: Header ----
