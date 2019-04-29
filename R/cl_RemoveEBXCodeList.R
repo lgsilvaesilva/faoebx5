@@ -7,8 +7,6 @@
 #'
 #' @return boolean
 #'
-#' @export
-#'
 #' @importFrom XML addChildren
 #'
 #' @author Luis G. Silva e Silva, \email{luis.silvaesilva@fao.org}

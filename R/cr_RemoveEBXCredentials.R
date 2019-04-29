@@ -22,7 +22,7 @@ RemoveEBXCredentials <- function(username) {
 
   if("EBX" %in% keyring::keyring_list()$keyring) {
 
-    if(missing(is.null(username))) {
+    if(missing(username)) {
       username <- Sys.getenv('USERNAME')
     }
 

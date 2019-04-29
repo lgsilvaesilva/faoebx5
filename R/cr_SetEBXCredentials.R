@@ -22,27 +22,46 @@
 #' @author Luis G. Silva e Silva, \email{luis.silvaesilva@fao.org}
 SetEBXCredentials <- function(username) {
 
+  if(missing(username)) {
+    username <- Sys.getenv('USERNAME')
+
+  } else {
+    Sys.setenv('USERNAME' = username)
+  }
+
   if(!"EBX" %in% keyring::keyring_list()$keyring) {
 
-    if(missing(username)) {
-      username <- Sys.getenv('USERNAME')
-    } else {
-      Sys.setenv('USERNAME' = username)
-    }
-
     keyring::keyring_create(keyring = "EBX")
+    keyring::keyring_lock("EBX")
+
+  } else {
+
+    ebx_key_list <- keyring::key_list(service = "EBX_SECRET", "EBX")
+
+  }
+
+  if(username %in% ebx_key_list$username) {
+
+    message('There is already EBX credentials stored. \nIf you want to update the secret, please run the function RemoveEBXCredentials() first.')
+
+  } else {
+
     keyring::key_set(service = "EBX_SECRET",
                      username = username,
                      keyring = "EBX")
 
     message('EBX credentials have been SET with success.')
+
     return(c('OK' = 0))
 
-  } else {
-
-    message('There is already EBX credentials stored.')
-
   }
+
+
+  # } else {
+  #
+  #   message('There is already EBX credentials stored.')
+  #
+  # }
 
 }
 
