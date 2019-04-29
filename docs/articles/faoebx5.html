@@ -71,7 +71,7 @@
     <div class="page-header toc-ignore">
       <h1>faoebx5 overview</h1>
             
-            <h4 class="date">2019-04-26</h4>
+            <h4 class="date">2019-04-29</h4>
       
       
       <div class="hidden name"><code>faoebx5.Rmd</code></div>
@@ -121,7 +121,7 @@ cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class
 Warning!
 </h4>
 <p class="mb-0">
-Please, be aware that the next two functions can modify the original data. Anyway, we should have permition to do changes in the original data.
+Please, be aware that the next two functions can modify the original data. Anyway, we should have rights to do changes in the original data.
 </p>
 </div>
 <hr>
@@ -129,20 +129,66 @@ Please, be aware that the next two functions can modify the original data. Anywa
 <div id="insertebxcodelist" class="section level2">
 <h2 class="hasAnchor">
 <a href="#insertebxcodelist" class="anchor"></a>InsertEBXCodeList()</h2>
-<p>TODO</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList</a></span>(<span class="dt">data     =</span> cl_isscfc_new,
+<p><code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> and <code><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList()</a></code> should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX.</p>
+<p>Currently, <code>faoebx5</code> has not implemmented function to remove data in the EBX, so we can do it only using the EBX user interface.</p>
+<p>The <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list <code>FAO_Level1</code> has the following columns: Identifier, FAO_Code, NameEn, NameFr, NameEs. Therefore, the new rows will contain these same columns, as we can see in the data frame <code>cl_faolevel1_new</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl_faolevel1_new &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(
+  <span class="dt">Identifier =</span> <span class="dv">99999</span>,
+  <span class="dt">FAO_Code =</span> 7L,
+  <span class="dt">NameEn =</span> <span class="st">"XXXX_English"</span>,
+  <span class="dt">NameFr =</span> <span class="st">"XXXX_French"</span>,
+  <span class="dt">NameEs =</span> <span class="st">"XXXX_Es"</span>
+)
+cl_faolevel1_new
+<span class="co">#&gt;   Identifier FAO_Code       NameEn      NameFr  NameEs</span>
+<span class="co">#&gt; 1      99999        7 XXXX_English XXXX_French XXXX_Es</span></code></pre></div>
+<p>Once we have created the data frame with the new rows, the next step is to run the function <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> specificating the arguments: <code>data</code> with data frame composed by the news rows to be inserted, <code>cl_name</code> the code list name, <code>folder</code> the folder name, <code>branch</code> the branch name, and <code>instance</code> the instance name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/all">all</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(cl_faolevel1_new) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(cl_fao_level1))
+<span class="co">#&gt; [1] TRUE</span>
+
+<span class="kw"><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList</a></span>(<span class="dt">data     =</span> cl_faolevel1_new,
                   <span class="dt">cl_name  =</span> <span class="st">'FAO_Level1'</span>,
                   <span class="dt">folder   =</span> <span class="st">'Commodity'</span>,
                   <span class="dt">branch   =</span> <span class="st">'Fishery'</span>,
-                  <span class="dt">instance =</span> <span class="st">'Fishery'</span>)</code></pre></div>
+                  <span class="dt">instance =</span> <span class="st">'Fishery'</span>)
+<span class="co">#&gt; [1] TRUE</span>
+
+cl_fao_level1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'FAO_Level1 '</span>)
+cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbl_df</span>()
+<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt;   Identifier FAO_Code NameEn                   NameFr                   NameEs                 </span>
+<span class="co">#&gt;   &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;                    &lt;fct&gt;                    &lt;fct&gt;                  </span>
+<span class="co">#&gt; 1 50001      1        Fish                     Poissons                 Peces                  </span>
+<span class="co">#&gt; 2 50064      2        Crustaceans              Crustacés                Crustáceos             </span>
+<span class="co">#&gt; 3 50086      5        Molluscs, aquatic inver~ Mollusques, autres inve~ Moluscos y otros inver~</span>
+<span class="co">#&gt; 4 50114      7        Fish, crustaceans, moll~ Poissons, crustacés, mo~ Peces, crustáceos, mol~</span>
+<span class="co">#&gt; 5 99999      7        XXXX_English             XXXX_French              XXXX_Es</span></code></pre></div>
 </div>
 <div id="updateebxcodelist" class="section level2">
 <h2 class="hasAnchor">
 <a href="#updateebxcodelist" class="anchor"></a>UpdateEBXCodeList()</h2>
-<p>TODO</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'EBXCodelist'</span>,
-                  <span class="dt">folder =</span> <span class="st">'Metadata'</span>,
-                  <span class="dt">data =</span> cl_update)</code></pre></div>
+<p><code><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList()</a></code> function works similarly to <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code>. Therefore, we have to create a data frame with the data that we desire to update and then specify the code list name, as well as the <code>folder</code> name, <code>branch</code> name, and the <code>instance</code> name. In this example, we just changed the data stored in the column <code>NameEs</code> from <code>XXXX_Es</code> to <code>Name spanish</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl_update &lt;-<span class="st"> </span>cl_faolevel1_new
+cl_update &lt;-<span class="st"> </span>cl_update <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">NameEs =</span> <span class="st">'Name spanish'</span>)
+
+<span class="kw"><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList</a></span>(<span class="dt">data =</span> cl_update,
+                  <span class="dt">cl_name  =</span> <span class="st">'FAO_Level1'</span>,
+                  <span class="dt">folder   =</span> <span class="st">'Commodity'</span>,
+                  <span class="dt">branch   =</span> <span class="st">'Fishery'</span>,
+                  <span class="dt">instance =</span> <span class="st">'Fishery'</span>)
+<span class="co">#&gt; [1] TRUE</span>
+
+cl_fao_level1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span>(<span class="dt">cl_name =</span> <span class="st">'FAO_Level1 '</span>)
+cl_fao_level1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tbl_df</span>()
+<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt;   Identifier FAO_Code NameEn                   NameFr                   NameEs                 </span>
+<span class="co">#&gt;   &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;                    &lt;fct&gt;                    &lt;fct&gt;                  </span>
+<span class="co">#&gt; 1 50001      1        Fish                     Poissons                 Peces                  </span>
+<span class="co">#&gt; 2 50064      2        Crustaceans              Crustacés                Crustáceos             </span>
+<span class="co">#&gt; 3 50086      5        Molluscs, aquatic inver~ Mollusques, autres inve~ Moluscos y otros inver~</span>
+<span class="co">#&gt; 4 50114      7        Fish, crustaceans, moll~ Poissons, crustacés, mo~ Peces, crustáceos, mol~</span>
+<span class="co">#&gt; 5 99999      7        XXXX_English             XXXX_French              Name spanish</span></code></pre></div>
 </div>
   </div>
 

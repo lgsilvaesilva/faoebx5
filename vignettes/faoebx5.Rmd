@@ -25,7 +25,7 @@ The first time you use the `faoebx5` package you must set your EBX credentials. 
 
 Once you have typed your password twice after run `SetEBXCredentials()` function, you do not need to rerun this function, because your credential will be kept.
 
-```{r eval=TRUE, include=TRUE, message=FALSE}
+```{r credentials, eval=TRUE, include=TRUE, message=FALSE}
 library('faoebx5')
 library('dplyr')
 SetEBXCredentials()
@@ -35,7 +35,7 @@ SetEBXCredentials()
 
 This function aimed to get the list of code list available in the EBX5. It has two arguments: `branch` and `instance` that default values are set as <span class="badge badge-danger">"Fishery"</span>.
 
-```{r eval=TRUE, include=TRUE}
+```{r get_codelists, eval=TRUE, include=TRUE}
 ebx_cl <- GetEBXCodeLists()
 head(ebx_cl)
 ```
@@ -44,7 +44,7 @@ head(ebx_cl)
 
 This function aimed to read code list data from EBX5 to R. As we can see, 
 
-```{r eval=TRUE, include=TRUE}
+```{r read_codelists, eval=TRUE, include=TRUE}
 cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
 cl_fao_level1 %>% tbl_df()
 ```
@@ -54,29 +54,60 @@ cl_fao_level1 %>% tbl_df()
 <div class="alert alert-dismissible alert-warning">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <h4 class="alert-heading">Warning!</h4>
-  <p class="mb-0">Please, be aware that the next two functions can modify the original data. Anyway, we should have permition to do changes in the original data.</p>
+  <p class="mb-0">Please, be aware that the next two functions can modify the original data. Anyway, we should have rights to do changes in the original data.</p>
 </div>
 
 <hr>
 
 ## InsertEBXCodeList()
 
-TODO
+`InsertEBXCodeList()` and `UpdateEBXCodeList()` should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX. 
 
-```{r eval=FALSE, include=TRUE}
-InsertEBXCodeList(data     = cl_isscfc_new,
+Currently, `faoebx5` has not implemmented function to remove data in the EBX, so we can  do it only using the EBX user interface. 
+
+The `InsertEBXCodeList()` function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list `FAO_Level1` has the following columns: `r names(cl_fao_level1)`. Therefore, the new rows will contain these same columns, as we can see in the data frame `cl_faolevel1_new`.
+
+```{r new_cl, eval=TRUE, include=TRUE}
+cl_faolevel1_new <- data.frame(
+  Identifier = 99999,
+  FAO_Code = 7L,
+  NameEn = "XXXX_English",
+  NameFr = "XXXX_French",
+  NameEs = "XXXX_Es"
+)
+cl_faolevel1_new
+```
+
+Once we have created the data frame with the new rows, the next step is to run the function `InsertEBXCodeList()` specificating the arguments: `data` with data frame composed by the news rows to be inserted, `cl_name` the code list name, `folder` the folder name, `branch` the branch name, and  `instance` the instance name.
+
+```{r insert_codelist, eval=TRUE, include=TRUE}
+all(names(cl_faolevel1_new) == names(cl_fao_level1))
+
+InsertEBXCodeList(data     = cl_faolevel1_new,
                   cl_name  = 'FAO_Level1',
                   folder   = 'Commodity',
                   branch   = 'Fishery',
                   instance = 'Fishery')
+
+cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
+cl_fao_level1 %>% tbl_df()
 ```
 
 ## UpdateEBXCodeList()
 
-TODO
+`UpdateEBXCodeList()` function works similarly to `InsertEBXCodeList()`. Therefore, we have to create a data frame with the data that we desire to update and then specify the code list name, as well as the `folder` name, `branch` name, and the `instance` name. In this example, we just changed the data stored in the column `NameEs` from `XXXX_Es` to `Name spanish`.
 
-```{r eval=FALSE, include=TRUE}
-UpdateEBXCodeList(cl_name = 'EBXCodelist',
-                  folder = 'Metadata',
-                  data = cl_update)
+```{r update_codelist, eval=TRUE, include=TRUE}
+cl_update <- cl_faolevel1_new
+cl_update <- cl_update %>%
+  mutate(NameEs = 'Name spanish')
+
+UpdateEBXCodeList(data = cl_update,
+                  cl_name  = 'FAO_Level1',
+                  folder   = 'Commodity',
+                  branch   = 'Fishery',
+                  instance = 'Fishery')
+
+cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
+cl_fao_level1 %>% tbl_df()
 ```
