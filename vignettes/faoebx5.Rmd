@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 options(width = 95)
 ```
 
-The first time you use the `faoebx5` package you must set your EBX credentials. In this step your credetials will be sotred in the safe way, for this we have used the [`keyring`](https://CRAN.R-project.org/package=keyring) R package. If you would not store your credentials, you should use the function `RemoveEBXCredentials()`.
+The first time you use the `faoebx5` package you must set your EBX credentials. In this step your credetials will be sotred in the safe way, for this we have used the [`keyring`](https://CRAN.R-project.org/package=keyring) R package. If you would not store your credentials, you should use the function `RemoveEBXCredentials()`. In this overview, we show just the functions related to code lists, once the functions about groups work similarly.
 
 Once you have typed your password twice after run `SetEBXCredentials()` function, you do not need to rerun this function, because your credential will be kept.
 
