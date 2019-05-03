@@ -24,7 +24,7 @@ RemoveEBXCredentials <- function(username) {
 
     if(missing(username)) {
 
-      username <- Sys.getenv('USERNAME')
+      username <- Sys.getenv('USERNAME_EBX')
 
     }
 

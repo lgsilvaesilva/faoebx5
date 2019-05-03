@@ -73,8 +73,12 @@ UpdateEBXCodeList <- function(data,
   h <- parseHTTPHeader(header$value())
   if(!(h['status'] >= 200 & h['status'] <= 300)) {
 
-    stop('Plese, check if you have permission to access this data.')
+    doc <- xmlParse(reader$value())
+    df  <- xmlToDataFrame(getNodeSet(doc, "//SOAP-ENV:Fault"), stringsAsFactors = F)
+    msg <- paste(names(df), ": ", df[1,], collapse = "\n", sep = '')
 
+    stop('Please, check if you have permission to access this data.\n\n',
+         'Details:\n', msg)
   } else{
 
     return(TRUE)
