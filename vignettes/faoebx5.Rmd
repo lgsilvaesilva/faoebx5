@@ -25,10 +25,10 @@ The first time you use the `faoebx5` package you must set your EBX credentials. 
 
 Once you have typed your password twice after run `SetEBXCredentials()` function, you do not need to rerun this function, because your credential will be kept.
 
-```{r credentials, eval=T, include=TRUE, message=FALSE}
+```{r credentials, echo=TRUE, message=FALSE, warning=FALSE}
 library('faoebx5')
 library('dplyr')
-SetEBXCredentials(username = "SilvaLu")
+SetEBXCredentials(username = "SilvaLu", new = FALSE)
 ```
 
 ## GetEBXCodeLists()

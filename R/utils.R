@@ -72,7 +72,7 @@ body_insert_request <- function(.user,
                                 .branch,
                                 .instance) {
 
-  .secret <- keyring::key_get("EBX_SECRET", username = .user, keyring = "ebx")
+  .secret <- GetSecret(username = .user)
 
   body <- sprintf('<?xml version="1.0" encoding="utf-8"?>
                   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:urn="urn:ebx-schemas:dataservices_1.0">
@@ -125,7 +125,7 @@ body_remove_request <- function(.user,
                                 .branch,
                                 .instance) {
 
-  .secret <- keyring::key_get("EBX_SECRET", username = .user, keyring = "ebx")
+  .secret <- GetSecret(username = .user)
 
   body <- sprintf('<?xml version="1.0" encoding="utf-8"?>
                   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:urn="urn:ebx-schemas:dataservices_1.0">
@@ -180,7 +180,7 @@ body_update_request <- function(.user,
                                 .branch,
                                 .instance) {
 
-  .secret <- keyring::key_get("EBX_SECRET", username = .user, keyring = "ebx")
+  .secret <- GetSecret(username = .user)
 
   body <- sprintf('<?xml version="1.0" encoding="utf-8"?>
                   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:urn="urn:ebx-schemas:dataservices_1.0">
@@ -231,7 +231,7 @@ body_update_request <- function(.user,
 #' @author Luís G. Silva e Silva, \email{luis.silvaesilva@fao.org}
 body_select_request <- function(.user, .name, .branch, .instance) {
 
-  .secret <- keyring::key_get("EBX_SECRET", username = .user, keyring = "ebx")
+  .secret <- GetSecret(username = .user)
 
   body <- sprintf('<?xml version="1.0" encoding="utf-8"?>
                   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:urn="urn:ebx-schemas:dataservices_1.0">
@@ -274,7 +274,7 @@ body_select_request <- function(.user, .name, .branch, .instance) {
 #' @author Luís G. Silva e Silva, \email{luis.silvaesilva@fao.org}
 body_get_request <- function(.user, .type, .branch, .instance) {
 
-  .secret <- keyring::key_get("EBX_SECRET", username = .user, keyring = "ebx")
+  .secret <- GetSecret(username = .user)
 
   body <- sprintf('<?xml version="1.0" encoding="utf-8"?>
                   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sec="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:urn="urn:ebx-schemas:dataservices_1.0">
