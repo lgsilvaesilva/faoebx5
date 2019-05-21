@@ -27,4 +27,6 @@ you can provide your username by the argument \code{username}.
 }
 \author{
 Luís G. Silva e Silva, \email{luis.silvaesilva@fao.org}
+credential stored in the EBX file
+credentials stored in the default variable
 }

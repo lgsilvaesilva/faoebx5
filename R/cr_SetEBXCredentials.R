@@ -1,6 +1,10 @@
 #' @title Set EBX Credentials
 #'
-#' @param username username, a character scalar.
+#' @param username username, a character.
+#' @param password password, a character.
+#' @param lock logical, default is FALSE. If it is TRUE, will store a locked file with the password,
+#' and whenever trying to use the credential will ask for the password to unlock the data.
+#' @param new logical, default is TRUE. It indicates whether will be set credentials to a new user.
 #'
 #' @seealso \code{\link{RemoveEBXCredentials}}.
 #'
@@ -20,7 +24,25 @@
 #' @export
 #'
 #' @author Luis G. Silva e Silva, \email{luis.silvaesilva@fao.org}
-SetEBXCredentials <- function(username) {
+SetEBXCredentials <- function(username, password, lock = FALSE, new = TRUE) {
+
+  if(!new) {
+
+    if(missing(username)) {
+
+      username <- Sys.getenv('USERNAME')
+      Sys.setenv('USERNAME_EBX' = username)
+
+    } else {
+
+      Sys.setenv('USERNAME_EBX' = username)
+
+    }
+
+    message('EBX credentials have been SET with success for the username: *', username, '*.')
+    return(c('OK' = 0))
+
+  }
 
   if(missing(username)) {
 
@@ -33,38 +55,63 @@ SetEBXCredentials <- function(username) {
 
   }
 
-  if(!"EBX" %in% keyring::keyring_list()$keyring) {
+  if(lock) {
 
+    if(!"EBX" %in% keyring::keyring_list()$keyring) {
+
+    message("Enter password to lock EBX credentials")
     keyring::keyring_create(keyring = "EBX")
     keyring::keyring_lock("EBX")
 
-  }
+    }
 
-  ebx_key_list <- keyring::key_list(service = "EBX_SECRET", "EBX")
+    # ebx_key_list <- keyring::key_list(service = "EBX_SECRET", "EBX")
 
+    if (missing(password)) {
 
-  if(username %in% ebx_key_list$username) {
+      keyring::key_set(service = "EBX_SECRET",
+                       username = username,
+                       keyring = "EBX")
 
-    message('There is already EBX credentials stored. \nIf you want to update the secret, please run the function RemoveEBXCredentials() first.')
+      message('EBX credentials have been SET with success.')
+      return(c('OK' = 0))
+
+    } else {
+
+      keyring::key_set_with_value(service = "EBX_SECRET",
+                                  username = username,
+                                  password = password,
+                                  keyring = "EBX")
+
+      message('EBX credentials have been SET with success.')
+      return(c('OK' = 0))
+
+    }
 
   } else {
 
-    keyring::key_set(service = "EBX_SECRET",
-                     username = username,
-                     keyring = "EBX")
+    if (missing(password)) {
 
-    message('EBX credentials have been SET with success.')
+      keyring::key_set(service = "EBX_SECRET",
+                       username = username)
 
-    return(c('OK' = 0))
+      message('EBX credentials have been SET with success.')
+      return(c('OK' = 0))
+
+    } else {
+
+      keyring::key_set_with_value(service = "EBX_SECRET",
+                                  username = username,
+                                  password = password)
+
+      message('EBX credentials have been SET with success.')
+      return(c('OK' = 0))
+
+    }
 
   }
 
 
-  # } else {
-  #
-  #   message('There is already EBX credentials stored.')
-  #
-  # }
 
 }
 

@@ -25,10 +25,10 @@ The first time you use the `faoebx5` package you must set your EBX credentials. 
 
 Once you have typed your password twice after run `SetEBXCredentials()` function, you do not need to rerun this function, because your credential will be kept.
 
-```{r credentials, eval=T, include=TRUE, message=FALSE}
+```{r credentials, echo=TRUE, message=FALSE, warning=FALSE}
 library('faoebx5')
 library('dplyr')
-SetEBXCredentials(username = "SilvaLu")
+SetEBXCredentials(username = "SilvaLu", new = FALSE)
 ```
 
 ## GetEBXCodeLists()
@@ -42,7 +42,7 @@ head(ebx_cl)
 
 ## ReadEBXCodeList()
 
-This function aimed to read code list data from EBX5 to R. As we can see, 
+This function aimed to read code list data from EBX5 to R. As we can see,
 
 ```{r read_codelists, eval=T, include=TRUE}
 cl_fao_level1 <- ReadEBXCodeList(cl_name = 'FAO_Level1 ')
@@ -61,9 +61,9 @@ cl_fao_level1 %>% tbl_df()
 
 ## InsertEBXCodeList()
 
-`InsertEBXCodeList()` and `UpdateEBXCodeList()` should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX. 
+`InsertEBXCodeList()` and `UpdateEBXCodeList()` should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX.
 
-Currently, `faoebx5` has not implemmented function to remove data in the EBX, so we can  do it only using the EBX user interface. 
+Currently, `faoebx5` has not implemmented function to remove data in the EBX, so we can  do it only using the EBX user interface.
 
 The `InsertEBXCodeList()` function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list `FAO_Level1` has the following columns: `r names(cl_fao_level1)`. Therefore, the new rows will contain these same columns, as we can see in the data frame `cl_faolevel1_new`.
 

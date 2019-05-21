@@ -4,10 +4,17 @@
 \alias{SetEBXCredentials}
 \title{Set EBX Credentials}
 \usage{
-SetEBXCredentials(username)
+SetEBXCredentials(username, password, lock = FALSE, new = TRUE)
 }
 \arguments{
-\item{username}{username, a character scalar.}
+\item{username}{username, a character.}
+
+\item{password}{password, a character.}
+
+\item{lock}{logical, default is FALSE. If it is TRUE, will store a locked file with the password,
+and whenever trying to use the credential will ask for the password to unlock the data.}
+
+\item{new}{logical, default is TRUE. It indicates whether will be set credentials to a new user.}
 }
 \value{
 Status 0 (zero) ok.
